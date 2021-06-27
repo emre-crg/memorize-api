@@ -2,7 +2,7 @@
 exports.up = function(knex) {
   return knex.schema
     .createTable('sets', (table) => {
-      table.increments();
+      table.increments("id");
       table.string("title").notNullable();
       table.string("creator_name").notNullable();
       table.string("statement").notNullable();
