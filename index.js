@@ -1,14 +1,8 @@
-var express = require('express')
-var app = express()
+  
+const server = require("./api/server");
 
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+const PORT = process.env.PORT || 4001;
 
-app.get('/sets', (req, res) => {
-  res.send('setler')
-})
+server.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`));
 
-app.listen(5000, () => {
-  console.log('http://localhost:5000 adresi dinleniyor')
-})
+module.exports = server;
