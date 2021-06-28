@@ -8,9 +8,11 @@ router.use(cors());
 router.use(helmet());
 
 const setRouter = require("../data/routers/set-router");
+const cardRouter = require("../data/routers/card-router");
 // const userRouter = require("../data/routers/user-router");
 
 router.use("/sets", setRouter);
+router.use("/card", cardRouter);
 // router.use("/", userRouter);
 
 router.get("/", (req, res) => {

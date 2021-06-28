@@ -7,7 +7,7 @@ exports.up = function(knex) {
       table.string("creator_name").notNullable();
       table.string("statement").notNullable();
     }).createTable('card', (table) => {
-      table.increments();
+      table.increments("id");
       table.integer('sets_id').unsigned();
       table.foreign('sets_id').references('sets.id').onUpdate('CASCADE').onDelete('CASCADE');
       table.string('term').notNullable();
