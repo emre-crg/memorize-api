@@ -18,15 +18,12 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  const createSet = req.body;
+  const {title, creator_name, statement} = req.body;
 
-  if (!createSet.title) {
-    next({
-      statusCode: 400,
-      errorMessage: "Set girmek için başlık girmelisiniz",
-    });
+  if (!title || !statement || !creator_name) {
+    res.status(401).json({ errorMessage: "Zorunlu alanlar: 'title', 'author' veya 'statement' eksik."})
   } else {
-    Sets.addSetsTable(createSet)
+    Sets.addSetsTable({title, creator_name, statement})
       .then((item) => {
         res.status(201).json(item);
       })

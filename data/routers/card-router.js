@@ -75,18 +75,24 @@ router.post("/:setId", (req, res, next) => {
   const {setId} = req.params;
   createCard.sets_id = setId;
 
-  console.log('creCard', createCard)
-  DM.addCardTable(createCard)
-  .then((item) => {
-    res.status(201).json(item);
-  })
-  .catch((err) => {
-    next({
-      statusCode: 500,
-      errorMessage: "Set oluşturulurken hata oluştu.",
-      err,
+  const { term, definition, sets_id } = createCard;
+
+  if(!term || !definition || !sets_id) {
+    res.status(401).json({ errorMessage: "Zorunlu alanlar: 'title', 'author' veya 'statement' eksik."})
+  } else {
+    
+    DM.addCardTable(createCard)
+    .then((item) => {
+      res.status(201).json(item);
+    })
+    .catch((err) => {
+      next({
+        statusCode: 500,
+        errorMessage: "Set oluşturulurken hata oluştu.",
+        err,
+      });
     });
-  });
+  }
 });
 
 
